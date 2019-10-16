@@ -9,7 +9,8 @@ param (
 
 $WorkDir = 	Split-Path -Parent $PSCommandPath
 $Solutions = if ($Solution -eq '') { Get-Item ("{0}\*.sln" -f $WorkDir) | %{ $_.FullName } } else { $Solution }
-$NugetPath = Join-Path $WorkDir '.nuget\nuget.exe'
+$NugetDir = Join-Path $WorkDir '.nuget'
+$NugetPath = Join-Path $NugetDir 'nuget.exe'
 
 $MSBuildExePath = ls "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\MSBuild\*\Bin\MSBuild.exe" -ErrorAction Ignore | %{ $_.FullName }  | Select-Object -Last 1
 if (!$MSBuildExePath)
@@ -36,6 +37,7 @@ $PackagePath = $WorkDir #Join-Path $WorkDir 'artifacts\packages'
 
 if (!(Test-Path $NugetPath))
 {
+        New-Item $NugetDir -ItemType Directory -ErrorAction Ignore | Out-Null
 	Write-Host 'Downloading latest version of NuGet.exe...'
 	$ProgressPreference = 'SilentlyContinue'
 	Invoke-WebRequest 'https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe' -OutFile $NugetPath
