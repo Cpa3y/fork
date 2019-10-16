@@ -1,0 +1,15 @@
+[Bb]in
+[Oo]bj
+*.suo
+*.user
+*.cache
+*.idea
+*.db
+*.exe
+*.log
+*.nupkg
+.vs
+/packages
+/deploy
+/.nuget
+Web.config
