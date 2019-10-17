@@ -31,7 +31,6 @@ namespace Fork.Gui
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
 
