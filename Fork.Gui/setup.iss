@@ -41,7 +41,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; 
 
 [Files]
-Source:{#srcPath}\*.*; DestDir: "{app}"; Flags: ignoreversion recursesubdirs  
+Source:{#srcPath}\*.*; DestDir: "{app}"; Flags: ignoreversion recursesubdirs;    
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"
@@ -49,7 +49,10 @@ Name: "{group}\Fork.Gui.uninstall.exe"; Filename: "{uninstallexe}"
 Name: "{group}\Fork.Gui.exe.config"; Filename: "{app}\Fork.Gui.exe.config"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"; Tasks: desktopicon
 Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"      
-                 
+
+[Registry]
+Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "Fork.Gui.exe"; ValueData: "{app}\Fork.Gui.exe";                 
+
 [Code]
 const
 
@@ -77,6 +80,14 @@ if ResultPath='' then
 
     Result:= ResultPath + '*.*';
   end
+end;
+
+procedure TaskKill(FileName: String);
+var
+  ResultCode: Integer;
+begin
+    Exec(ExpandConstant('taskkill.exe'), '/f /im ' + '"' + FileName + '"', '', SW_HIDE,
+     ewWaitUntilTerminated, ResultCode);
 end;
 
 (*procedure InitializeWizard();
@@ -153,3 +164,12 @@ begin
   end;
 end;
 
+procedure CurUninstallStepChanged(CurStep: TUninstallStep);  
+begin;
+  case CurStep of
+    usUninstall:
+    begin
+     TaskKill('Fork.Gui.exe');
+    end;
+  end;
+end;
