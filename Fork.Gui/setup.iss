@@ -33,22 +33,24 @@ UninstallDisplayName=ForkGUI
 DisableDirPage=auto
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; 
+;[Tasks]
+;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+;Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; 
 
 [Files]
 Source:{#srcPath}\*.*; DestDir: "{app}"; Flags: ignoreversion recursesubdirs;    
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"
-Name: "{group}\Fork.Gui.uninstall.exe"; Filename: "{uninstallexe}"
-Name: "{group}\Fork.Gui.exe.config"; Filename: "{app}\Fork.Gui.exe.config"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"; Tasks: desktopicon
-Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"      
+Name: "{group}\Fork"; Filename: "{app}\Fork.Gui.exe"
+Name: "{group}\Удаление Fork"; Filename: "{uninstallexe}"
+Name: "{group}\Конфигурация Fork"; Filename: "{app}\Fork.Gui.exe.config"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"; 
+;Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\Fork.Gui.exe"      
+
+[Run]
+Filename: "{app}\Fork.Gui.exe"; Flags: shellexec skipifsilent nowait; 
 
 [Registry]
 Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "Fork.Gui.exe"; ValueData: "{app}\Fork.Gui.exe";                 
