@@ -23,12 +23,13 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName="Modem"
+DisableProgramGroupPage=yes
 OutputDir={#outPath}
-OutputBaseFilename=ForkGui
+OutputBaseFilename="Setup Fork"
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
-AlwaysRestart=yes
+;AlwaysRestart=yes
 UninstallDisplayName=ForkGUI
 DisableDirPage=auto
 
