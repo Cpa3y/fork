@@ -24,5 +24,12 @@ namespace Fork.Configuration.CommandLine
             port = 0;
             return int.TryParse(input, out port);
         }
+
+        public static bool ParseFile(string input, out string filename)
+        {
+            filename = new string(input.Select(x => x != '$' ? x : ' ').ToArray());
+
+            return filename.Length > 0;
+        }
     }
 }

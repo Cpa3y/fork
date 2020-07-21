@@ -51,6 +51,7 @@
     <Compile Include="ConnectionConfig.cs" />
     <Compile Include="Connections\ConnectConfig.cs" />
     <Compile Include="Connections\ListenConfig.cs" />
+    <Compile Include="Connections\WriteToFileConfig.cs" />
     <Compile Include="ForkConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

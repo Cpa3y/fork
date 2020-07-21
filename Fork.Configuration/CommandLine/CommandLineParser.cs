@@ -28,15 +28,20 @@ namespace Fork.Configuration.CommandLine
                 case "connect":
                     return ParserHelper.ParseConnect(kvp.Value, out var ip, out var port)
                     ? new ConnectConfig { Ip = ip, Port = port}
-                    : throw new ApplicationException("Arg parsing failed");
+                    : throw new ApplicationException("Arg parsing failed: unable to parse address");
 
                 case "listen":
                     return ParserHelper.ParseListen(kvp.Value, out port)
                     ? new ListenConfig { Port = port}
-                    : throw new ApplicationException("Arg parsing failed");
+                    : throw new ApplicationException("Arg parsing failed: unable to parse port");
+
+                case "file":
+                    return ParserHelper.ParseFile(kvp.Value, out var filename)
+                        ? new WriteToFileConfig { Filename = filename }
+                        : throw new ApplicationException("Arg parsing failed: empty filename");
 
                 default:
-                    throw new ApplicationException("Arg parsing failed");
+                    throw new ApplicationException("Arg parsing failed: unknown source arg");
 
             }
 
